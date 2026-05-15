@@ -4,7 +4,7 @@ Submitted by: **Viet Thai Nguyen**
 
 About this web app: **Creatorverse is a React web app that lets users discover, add, view, edit, and delete content creators. The app displays a curated gallery of creators with their name, page link, description, and optional image. It uses Supabase as the backend database and React Router for navigation between pages.**
 
-Time spent: **8** hours
+Time spent: **3** hours
 
 ## Required Features
 
@@ -40,7 +40,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='https://www.loom.com/share/3b08b4c7b0a94de1b2d8127c39ff59f8' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+[Click here to watch my Loom video walkthrough](https://www.loom.com/share/YOUR_LOOM_VIDEO_ID)
+
+Video created with **Loom**
 
 ## Notes
 
