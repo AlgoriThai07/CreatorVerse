@@ -40,7 +40,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-[Click here to watch my Loom video walkthrough](https://www.loom.com/share/YOUR_LOOM_VIDEO_ID)
+[Click here to watch my Loom video walkthrough](https://www.loom.com/share/3b08b4c7b0a94de1b2d8127c39ff59f8)
 
 Video created with **Loom**
 
