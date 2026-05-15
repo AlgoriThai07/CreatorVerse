@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { supabase } from "../client.js";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../client";
 
-const AddCreator = () => {
+function AddCreator() {
   const navigate = useNavigate();
 
   const [creator, setCreator] = useState({
@@ -12,19 +12,19 @@ const AddCreator = () => {
     imageURL: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  function handleChange(event) {
+    const { name, value } = event.target;
 
     setCreator((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-    const { data, error } = await supabase.from("creators").insert({
+    const { error } = await supabase.from("creators").insert({
       name: creator.name,
       url: creator.url,
       description: creator.description,
@@ -33,60 +33,108 @@ const AddCreator = () => {
 
     if (error) {
       console.error("Error adding creator:", error);
-      alert("Failed to add creator. Please try again.");
+      alert("Something went wrong while adding the creator.");
     } else {
-      console.log("Creator added:", data);
       navigate("/");
     }
   }
 
   return (
-    <div className="page">
-      <h1>Add New Creator</h1>
+    <div className="page form-page">
+      <div className="form-hero">
+        <p className="detail-label">Create New Profile</p>
 
-      <form onSubmit={handleSubmit} className="creator-form">
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={creator.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          URL:
-          <input
-            type="url"
-            name="url"
-            value={creator.url}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={creator.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Image URL:
-          <input
-            type="url"
-            name="imageURL"
-            value={creator.imageURL}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Add Creator</button>
-      </form>
+        <h1>Add Creator</h1>
+
+        <p>
+          Add a creator you think deserves a spot in your Creatorverse. Include
+          their name, channel link, description, and an optional image.
+        </p>
+      </div>
+
+      <div className="form-layout">
+        <form onSubmit={handleSubmit} className="creator-form">
+          <label>
+            Creator Name
+            <input
+              type="text"
+              name="name"
+              value={creator.name}
+              onChange={handleChange}
+              placeholder="e.g. Fireship"
+              required
+            />
+          </label>
+
+          <label>
+            Creator URL
+            <input
+              type="url"
+              name="url"
+              value={creator.url}
+              onChange={handleChange}
+              placeholder="https://youtube.com/@creator"
+              required
+            />
+          </label>
+
+          <label>
+            Description
+            <textarea
+              name="description"
+              value={creator.description}
+              onChange={handleChange}
+              placeholder="What kind of content do they make?"
+              required
+            />
+          </label>
+
+          <label>
+            Image URL
+            <input
+              type="url"
+              name="imageURL"
+              value={creator.imageURL}
+              onChange={handleChange}
+              placeholder="Optional image link"
+            />
+          </label>
+
+          <button type="submit">Add to Creatorverse</button>
+        </form>
+
+        <div className="form-preview-card">
+          <p className="detail-label">Preview</p>
+
+          <div className="preview-image">
+            {creator.imageURL ? (
+              <img
+                src={creator.imageURL}
+                alt={creator.name || "Creator preview"}
+              />
+            ) : (
+              <span>{creator.name ? creator.name.charAt(0) : "?"}</span>
+            )}
+          </div>
+
+          <h2>{creator.name || "Creator Name"}</h2>
+
+          <p>
+            {creator.description ||
+              "Your creator description will appear here as you type."}
+          </p>
+
+          {creator.url ? (
+            <a href={creator.url} target="_blank" rel="noreferrer">
+              Visit Creator Page
+            </a>
+          ) : (
+            <span className="muted-link">Creator link preview</span>
+          )}
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default AddCreator;

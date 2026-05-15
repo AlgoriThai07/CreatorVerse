@@ -20,8 +20,6 @@ function App() {
     <div>
       <nav>
         <Link to="/">CreatorVerse</Link>
-        {"|"}
-        <Link to="/new">Add Creator</Link>
       </nav>
       {elements}
     </div>
